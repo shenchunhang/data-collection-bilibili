@@ -28,19 +28,13 @@ spring:
     cache: false # ����ʱ�رջ���,��Ȼû������ʵʱҳ��
 
 
-# API 接口
-# 主页
+# 是否
+# �ӿڵ�ַ
 index:
-  x-web-interface-search-default: https://api.bilibili.com/x/web-interface/search/default                               # indexPage--搜索框
-  index-recommend: https://www.bilibili.com/index/recommend.json                                                        # indexPage--�Ƽ�
-  # 主页--在线人数
-  x-web-interface-online: https://api.bilibili.com/x/web-interface/online?callback=jqueryCallback_bili_8790104256927396&jsonp=jsonp&_=1559048160653
-  # rid: 1动画
-  x-web-interface-dynamic-region-1: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_9617967223198589&jsonp=jsonp&ps=10&rid=1&_=1559041446677
-  x-web-interface-dynamic-region-1-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_15392723810828834&rid=1&day=3&original=0&jsonp=jsonp&_=1559041446678
-  x-web-interface-dynamic-region: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_8861752950879569&jsonp=jsonp&ps=10&rid=1&_=1559048160657
-  room-v1-RoomRecommend-biliIndexRecList: https://api.live.bilibili.com/room/v1/RoomRecommend/biliIndexRecList          # indexPage--直播排行
-  pgc-web-timeline: https://api.bilibili.com/pgc/web/timeline?types=1                                                   # indexPage--番剧
+  x-web-interface-search-default: https://api.bilibili.com/x/web-interface/search/default                               # ��ҳ--������
+  index-recommend: https://www.bilibili.com/index/recommend.json                                                        # ��ҳ--�Ƽ�
+  room-v1-RoomRecommend-biliIndexRecList: https://api.live.bilibili.com/room/v1/RoomRecommend/biliIndexRecList          # ��ҳ--ֱ���Ƽ�
+  pgc-web-timeline: https://api.bilibili.com/pgc/web/timeline?types=1                                                   # ��ҳ--�����б�
   #�����ض�����Ͷ���� 2019��05��24�� - 2019��05��27�� �������ۺϵ÷֣�ÿ�ո���һ��
   pgc-web-rank-list: https://api.bilibili.com/pgc/web/rank/list?season_type=1&day=3
 
