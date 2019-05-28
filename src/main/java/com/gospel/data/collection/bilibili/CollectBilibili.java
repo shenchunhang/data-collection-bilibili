@@ -19,7 +19,7 @@ import java.net.URL;
 @Service
 public class CollectBilibili {
 
-    public static void collect(String path) {
+    public String collect(String path) {
         BufferedReader in = null;
         StringBuffer result = null;
         try {
@@ -35,17 +35,16 @@ public class CollectBilibili {
             while ((line = in.readLine()) != null) {
                 result.append(line);
             }
-            System.out.println(result);
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return result.toString();
     }
 
-    public static void main(String[] args) {
-        collect("https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_011217614" +
-                "01943977&jsonp=jsonp&ps=15&rid=138&_=1558928420355");
-    }
+//    public static void main(String[] args) {
+//        collect("https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_011217614" +
+//                "01943977&jsonp=jsonp&ps=15&rid=138&_=1558928420355");
+//    }
 }
