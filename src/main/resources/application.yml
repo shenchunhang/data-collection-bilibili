@@ -35,19 +35,34 @@ index:
   index-recommend: https://www.bilibili.com/index/recommend.json                                                        # indexPage--�Ƽ�
   # 主页--在线人数
   x-web-interface-online: https://api.bilibili.com/x/web-interface/online?callback=jqueryCallback_bili_8790104256927396&jsonp=jsonp&_=1559048160653
-  # rid: 1动画
-  x-web-interface-dynamic-region-1: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_9617967223198589&jsonp=jsonp&ps=10&rid=1&_=1559041446677
-  x-web-interface-dynamic-region-1-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_15392723810828834&rid=1&day=3&original=0&jsonp=jsonp&_=1559041446678
-  x-web-interface-dynamic-region: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_8861752950879569&jsonp=jsonp&ps=10&rid=1&_=1559048160657
   room-v1-RoomRecommend-biliIndexRecList: https://api.live.bilibili.com/room/v1/RoomRecommend/biliIndexRecList          # indexPage--直播排行
   pgc-web-timeline: https://api.bilibili.com/pgc/web/timeline?types=1                                                   # indexPage--番剧
-  #�����ض�����Ͷ���� 2019��05��24�� - 2019��05��27�� �������ۺϵ÷֣�ÿ�ո���һ��
+  # 『连载动画』投稿在 2019年05月25日 - 2019年05月28日 的数据综合得分，每日更新一次
   pgc-web-rank-list: https://api.bilibili.com/pgc/web/rank/list?season_type=1&day=3
+  # 主页-动画,  rid:1,  tname:MMD·3D
+  x-web-interface-dynamic-region-1: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_9617967223198589&jsonp=jsonp&ps=10&rid=1&_=1559041446677
+  x-web-interface-dynamic-region-1-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_15392723810828834&rid=1&day=3&original=0&jsonp=jsonp&_=1559041446678
+
+  # 主页-番剧动态,  rid:13,  tname:连载动画
+  x-web-interface-dynamic-region-13: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_1557794292463961&jsonp=jsonp&ps=10&rid=13&_=1559048160659
+  # 主页-国产原创相关,  rid:168,  tname:国产原创相关
+  x-web-interface-dynamic-region-168: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=168
+  x-web-interface-dynamic-region-168-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=168&day=3&original=0
+
+  # 主页-音乐,  rid:3,  tname:MV
+  x-web-interface-dynamic-region-3: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_5715392394722729&jsonp=jsonp&ps=10&rid=3&_=1559053160000
+  x-web-interface-dynamic-region-3-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_08179562081053349&rid=3&day=3&original=0&jsonp=jsonp&_=1559053160001
+  # 主页-舞蹈,  rid:129,  tname:三次元舞蹈
+  x-web-interface-dynamic-region-129: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_08179562081053349&rid=3&day=3&original=0&jsonp=jsonp&_=1559053160001
+  x-web-interface-dynamic-region-129-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_08179562081053349&rid=3&day=3&original=0&jsonp=jsonp&_=1559053160001
+  x-web-interface-ranking-region-155: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_8309136277926077&rid=155&day=3&original=1&jsonp=jsonp&_=1559048160702
 
   # rid:  33���ض���, 32��ᶯ��, 51��Ѷ��Ƶ, 152�ٷ�����, 153��������, 168����ԭ�����, 169����Ϸ, 195��̬�����㲥��
   # day:  3����3��,7����һ��      original:  0���а� ����������� �������
 anime:
   api-timeline_v2_global: https://bangumi.bilibili.com/api/timeline_v2_global                                           # ������--�������
+
+
   x-web-interface-dynamic-region-33: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=33               # ������--���ض���
   x-web-interface-ranking-region: https://api.bilibili.com/x/web-interface/ranking/region?rid=33&day=3&original=0       # ������--���ض���--����
   x-web-interface-dynamic-region-32: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=32               # ������--��ᶯ��
