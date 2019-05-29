@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost/ckdxc?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
-    #    url: jdbc:mysql://47.106.90.18:3306/ckdxc?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+#    url: jdbc:mysql://localhost/ckdxc?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://47.106.90.18:3306/bilibili?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
@@ -18,7 +18,7 @@ spring:
     jedis:
       pool:
         max: -1
-        min-idle: 0
+        min-idle: 10
         max-wait: 5000
         max-idle: -1
   thymeleaf:
@@ -43,18 +43,21 @@ index:
   x-web-interface-dynamic-region-1: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_9617967223198589&jsonp=jsonp&ps=10&rid=1&_=1559041446677
   x-web-interface-dynamic-region-1-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_15392723810828834&rid=1&day=3&original=0&jsonp=jsonp&_=1559041446678
 
-  # 主页-番剧动态,  rid:13,  tname:连载动画
+  # 主页-番剧动态,  rid:13
   x-web-interface-dynamic-region-13: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_1557794292463961&jsonp=jsonp&ps=10&rid=13&_=1559048160659
-  # 主页-国产原创相关,  rid:168,  tname:国产原创相关
+  # 主页-国产原创相关,  rid:168
   x-web-interface-dynamic-region-168: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=168
   x-web-interface-dynamic-region-168-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=168&day=3&original=0
 
-  # 主页-音乐,  rid:3,  tname:MV
+  # 主页-音乐,  rid:3
   x-web-interface-dynamic-region-3: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_5715392394722729&jsonp=jsonp&ps=10&rid=3&_=1559053160000
   x-web-interface-dynamic-region-3-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_08179562081053349&rid=3&day=3&original=0&jsonp=jsonp&_=1559053160001
-  # 主页-舞蹈,  rid:129,  tname:三次元舞蹈
-  x-web-interface-dynamic-region-129: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_08179562081053349&rid=3&day=3&original=0&jsonp=jsonp&_=1559053160001
-  x-web-interface-dynamic-region-129-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_08179562081053349&rid=3&day=3&original=0&jsonp=jsonp&_=1559053160001
+  # 主页-舞蹈,  rid:129
+  x-web-interface-dynamic-region-129: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_08787447063452469&jsonp=jsonp&ps=10&rid=129&_=1559053160006
+  x-web-interface-dynamic-region-129-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_6502909469618496&rid=129&day=3&original=0&jsonp=jsonp&_=1559053160007
+  # 主页-游戏,  rid:4
+  x-web-interface-dynamic-region-4: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_1610780009443813&jsonp=jsonp&ps=10&rid=4&_=1559053160016
+  x-web-interface-dynamic-region-4-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_30598136905451123&rid=4&day=3&original=0&jsonp=jsonp&_=1559053160017
   x-web-interface-ranking-region-155: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_8309136277926077&rid=155&day=3&original=1&jsonp=jsonp&_=1559048160702
 
   # rid:  33���ض���, 32��ᶯ��, 51��Ѷ��Ƶ, 152�ٷ�����, 153��������, 168����ԭ�����, 169����Ϸ, 195��̬�����㲥��
