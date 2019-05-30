@@ -52,7 +52,7 @@ public class SearchBoxThread extends Thread {
             Date now = new Date();
             logger.info("res \t" + no + "\t" + now);
 //            System.out.println("res \t" + no + "\t" + now);
-            saveData(res);
+            saveData(res, no);
             logger.info("save\t" + no + "\t" + now);
 //            System.out.println("save\t" + no + "\t" + now);
             ranM = RandomUtil.randomInt(1, 10);
@@ -93,31 +93,15 @@ public class SearchBoxThread extends Thread {
         return result.toString();
     }
 
-    private void saveData(String res) {
+    private void saveData(String res, int no) {
         String str = res.substring(res.indexOf("({") + 1, res.indexOf("})") + 1);
         Online online = new Online();
         JSONObject resJson = JSONObject.parseObject(str);
         JSONObject dataJson = JSONObject.parseObject(resJson.get("data").toString());
-        online.setWebOnline((int) dataJson.get("web_online"));
-        online.setPlayOnline((int) dataJson.get("play_online"));
-        online.setAllCount((int) dataJson.get("all_count"));
-        JSONObject regionJson = dataJson.getJSONObject("region_count");
-        online.setAnimaCount((int) regionJson.get("1"));        //动画区投稿数(1)
-        online.setMusicCount((int) regionJson.get("3"));        //音乐区投稿数(3)
-        online.setGanmeCount((int) regionJson.get("4"));        //游戏区投稿数(4)
-        online.setVarietyCount((int) regionJson.get("5"));      //娱乐区投稿数(5)
-        online.setDramaCount((int) regionJson.get("13"));       //番剧区投稿数(13)
-        online.setPart23count((int) regionJson.get("23"));      //未知分区23投稿数(23)
-        online.setScienceCount((int) regionJson.get("36"));     //科技区投稿数(36)
-        online.setGuichuCount((int) regionJson.get("119"));     //鬼畜区投稿数(119)
-        online.setDanceCount((int) regionJson.get("129"));      //舞蹈区投稿数(129)
-        online.setFashionCount((int) regionJson.get("155"));    //时尚区投稿数(155)
-        online.setLifeCount((int) regionJson.get("160"));       //生活区投稿数(160)
-        online.setAdCount((int) regionJson.get("165"));         //广告区投稿数(165)
-        online.setGuochuangCount((int) regionJson.get("167"));  //国创区投稿数(167)
-        online.setProjectionCount((int) regionJson.get("177")); //放映厅区投稿数(177)
-        online.setMovieCount((int) regionJson.get("181"));      //影视区投稿数(181)
-        online.setDigitalCount((int) regionJson.get("188"));    //数码区投稿数(188)
+        String dataJsonStr = dataJson.toJSONString();
+
+        redisUtil = applicationContext.getBean(RedisUtil.class);
+        redisUtil.set("searchBox" + no, dataJson.toJSONString());
         Date now = new Date();
         online.setCreated(now);
         online.setYear(now.getYear() + 1900);

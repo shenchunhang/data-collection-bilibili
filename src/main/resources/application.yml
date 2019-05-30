@@ -45,7 +45,7 @@ spring:
 # 主页
 index:
   x-web-interface-search-default: https://api.bilibili.com/x/web-interface/search/default                               # indexPage--搜索框
-  index-recommend: https://www.bilibili.com/index/recommend.json                                                        # indexPage--�Ƽ�
+  index-recommend: https://www.bilibili.com/index/recommend.json                                                        # indexPage--推荐
   # 主页--在线人数
   x-web-interface-online: https://api.bilibili.com/x/web-interface/online?callback=jqueryCallback_bili_8790104256927396&jsonp=jsonp&_=1559048160653
   room-v1-RoomRecommend-biliIndexRecList: https://api.live.bilibili.com/room/v1/RoomRecommend/biliIndexRecList          # indexPage--直播排行
