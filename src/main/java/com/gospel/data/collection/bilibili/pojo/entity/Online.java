@@ -26,7 +26,7 @@ public class Online {
     private int ganmeCount;         //游戏区投稿数(4)
     private int varietyCount;       //娱乐区投稿数(5)
     private int dramaCount;         //番剧区投稿数(13)
-    private int part23Count;        //未知分区23投稿数(23)
+    private int part23count;        //未知分区23投稿数(23)
     private int scienceCount;       //科技区投稿数(36)
     private int guichuCount;        //鬼畜区投稿数(119)
     private int danceCount;         //舞蹈区投稿数(129)

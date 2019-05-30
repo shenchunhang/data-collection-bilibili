@@ -42,18 +42,20 @@ public class OnlineThead extends Thread {
 
     @Override
     public void run() {
+        no = 1;
         while (true) {
             String res = collect(path);
             long nowTime = System.currentTimeMillis();
             Date now = new Date();
-            System.out.println("res\t\t\t" + now);
+            System.out.println("res \t" + no + "\t" + now);
 //            redisUtil.set("online" + nowTime, res);
             saveData(res);
-            System.out.println("save\t\t" + now);
-            ranM = RandomUtil.randomInt(1, 10);
-            ranS = RandomUtil.randomInt(10, 20);
-            waitTime = 1000 * ranS * ranM;
-            System.out.println("wait:" + waitTime + "\t" + now);
+            System.out.println("save\t" + no + "\t" + now);
+//            ranM = RandomUtil.randomInt(1, 10);
+//            ranS = RandomUtil.randomInt(10, 20);
+            waitTime = 1000 * 60 * 1;
+            System.out.println("wait\t"+ no + "\t" + now + "\t");
+            no++;
             try {
                 Thread.sleep(waitTime);
             } catch (InterruptedException e) {
@@ -100,7 +102,7 @@ public class OnlineThead extends Thread {
         online.setGanmeCount((int) regionJson.get("4"));        //游戏区投稿数(4)
         online.setVarietyCount((int) regionJson.get("5"));      //娱乐区投稿数(5)
         online.setDramaCount((int) regionJson.get("13"));       //番剧区投稿数(13)
-        online.setPart23Count((int) regionJson.get("23"));       //未知分区23投稿数(23)
+        online.setPart23count((int) regionJson.get("23"));       //未知分区23投稿数(23)
         online.setScienceCount((int) regionJson.get("36"));     //科技区投稿数(36)
         online.setGuichuCount((int) regionJson.get("119"));     //鬼畜区投稿数(119)
         online.setDanceCount((int) regionJson.get("129"));      //舞蹈区投稿数(129)
