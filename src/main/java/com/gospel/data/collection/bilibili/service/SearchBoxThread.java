@@ -2,8 +2,8 @@ package com.gospel.data.collection.bilibili.service;
 
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.gospel.data.collection.bilibili.pojo.entity.Online;
-import com.gospel.data.collection.bilibili.repository.OnlineRepository;
+import com.gospel.data.collection.bilibili.pojo.entity.SearchBox;
+import com.gospel.data.collection.bilibili.repository.SearchBoxRepository;
 import com.gospel.data.collection.bilibili.util.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +25,10 @@ import java.util.Date;
  *描述: 搜索框统计
  */
 public class SearchBoxThread extends Thread {
-    private String path = "https://api.bilibili.com/x/web-interface/online?callback=jqueryCallback_bili_18984301554370875&jsonp=jsonp&_=1559098307094";
+    private String path = "https://api.bilibili.com/x/web-interface/search/default";
     private ApplicationContext applicationContext;
     private RedisUtil redisUtil;
+    private Logger logger;
     private int no;
     private int ranM;
     private int ranS;
@@ -45,21 +46,16 @@ public class SearchBoxThread extends Thread {
     @Override
     public void run() {
         no = 1;
-        Logger logger = LoggerFactory.getLogger(getClass());
+        logger = LoggerFactory.getLogger(getClass());
         while (true) {
             String res = collect(path);
             long nowTime = System.currentTimeMillis();
             Date now = new Date();
-            logger.info("res \t" + no + "\t" + now);
-//            System.out.println("res \t" + no + "\t" + now);
             saveData(res, no);
-            logger.info("save\t" + no + "\t" + now);
-//            System.out.println("save\t" + no + "\t" + now);
             ranM = RandomUtil.randomInt(1, 10);
             ranS = RandomUtil.randomInt(10, 20);
             waitTime = 1000 * 60 * 1;
-            logger.info("wait\t" + no + "\t" + now + "\t");
-//            System.out.println("wait\t" + no + "\t" + now + "\t");
+            logger.info("[searchBox]\twait\t" + no + "\twaitTime:\t" + waitTime);
             no++;
             try {
                 Thread.sleep(waitTime);
@@ -90,25 +86,35 @@ public class SearchBoxThread extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        logger.info("[searchBox]\tres \t" + no + "\t" + result);
         return result.toString();
     }
 
     private void saveData(String res, int no) {
-        String str = res.substring(res.indexOf("({") + 1, res.indexOf("})") + 1);
-        Online online = new Online();
-        JSONObject resJson = JSONObject.parseObject(str);
+        JSONObject resJson = JSONObject.parseObject(res);
         JSONObject dataJson = JSONObject.parseObject(resJson.get("data").toString());
+        String showName = (String) dataJson.get("show_name");
         String dataJsonStr = dataJson.toJSONString();
-
         redisUtil = applicationContext.getBean(RedisUtil.class);
-        redisUtil.set("searchBox" + no, dataJson.toJSONString());
-        Date now = new Date();
-        online.setCreated(now);
-        online.setYear(now.getYear() + 1900);
-        online.setMonth(now.getMonth() + 1);
-        online.setDay(now.getDate());
-        OnlineRepository dao = applicationContext.getBean(OnlineRepository.class);
-        dao.save(online);
-        dao.flush();
+
+        if (redisUtil.sAdd("searchBoxShowName", showName) > 0) {
+            if (redisUtil.sAdd("searchBox", dataJsonStr) > 0) {
+                logger.info("[searchBox]\trdsave\t" + no + "\t" + new Date());
+                SearchBox searchBox = new SearchBox();
+                searchBox.setDataId(dataJson.getLong("id"));
+                searchBox.setShowName(dataJson.getString("show_name"));
+                searchBox.setName(dataJson.getString("name"));
+                searchBox.setSeid(dataJson.getString("seid"));
+                searchBox.setType(dataJson.getInteger("type"));
+                searchBox.setCreated(new Date());
+                SearchBoxRepository repository = applicationContext.getBean(SearchBoxRepository.class);
+                repository.save(searchBox);
+                repository.flush();
+                System.out.println("[searchBox]\tdbsave\t" + no + "\t新数据添加成功");
+            }
+        } else {
+            System.out.println("[searchBox]\tsavefail\t" + no + "\t数据重复,拒绝添加");
+        }
     }
 }

@@ -1,10 +1,8 @@
 package com.gospel.data.collection.bilibili.service;
 
-import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.gospel.data.collection.bilibili.pojo.entity.Online;
 import com.gospel.data.collection.bilibili.repository.OnlineRepository;
-import com.gospel.data.collection.bilibili.util.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -27,7 +25,7 @@ import java.util.Date;
 public class OnlineThead extends Thread {
     private String path = "https://api.bilibili.com/x/web-interface/online?callback=jqueryCallback_bili_18984301554370875&jsonp=jsonp&_=1559098307094";
     private ApplicationContext applicationContext;
-    private RedisUtil redisUtil;
+    private Logger logger;
     private int no;
     private int ranM;
     private int ranS;
@@ -45,19 +43,13 @@ public class OnlineThead extends Thread {
     @Override
     public void run() {
         no = 1;
-        Logger logger = LoggerFactory.getLogger(Logger.class);
+        logger = LoggerFactory.getLogger(Logger.class);
         while (true) {
             String res = collect(path);
-            long nowTime = System.currentTimeMillis();
             Date now = new Date();
-            logger.info("res \t" + no + "\t" + now);
-//            System.out.println("res \t" + no + "\t" + now);
             saveData(res);
-            logger.info("save\t" + no + "\t" + now);
-//            System.out.println("save\t" + no + "\t" + now);
             waitTime = 1000 * 60 * 1;
-            logger.info("wait\t" + no + "\t" + now + "\t");
-//            System.out.println("wait\t"+ no + "\t" + now + "\t");
+            logger.info("[online]\twait\t" + no + "\t" + waitTime);
             no++;
             try {
                 Thread.sleep(waitTime);
@@ -88,6 +80,7 @@ public class OnlineThead extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        logger.info("[online]\tres \t" + no + "\t" + result);
         return result.toString();
     }
 
@@ -96,26 +89,26 @@ public class OnlineThead extends Thread {
         Online online = new Online();
         JSONObject resJson = JSONObject.parseObject(str);
         JSONObject dataJson = JSONObject.parseObject(resJson.get("data").toString());
-        online.setWebOnline((int) dataJson.get("web_online"));
-        online.setPlayOnline((int) dataJson.get("play_online"));
-        online.setAllCount((int) dataJson.get("all_count"));
+        online.setWebOnline(dataJson.getInteger("web_online"));
+        online.setPlayOnline(dataJson.getInteger("play_online"));
+        online.setAllCount(dataJson.getInteger("all_count"));
         JSONObject regionJson = dataJson.getJSONObject("region_count");
-        online.setAnimaCount((int) regionJson.get("1"));        //动画区投稿数(1)
-        online.setMusicCount((int) regionJson.get("3"));        //音乐区投稿数(3)
-        online.setGanmeCount((int) regionJson.get("4"));        //游戏区投稿数(4)
-        online.setVarietyCount((int) regionJson.get("5"));      //娱乐区投稿数(5)
-        online.setDramaCount((int) regionJson.get("13"));       //番剧区投稿数(13)
-        online.setPart23count((int) regionJson.get("23"));      //未知分区23投稿数(23)
-        online.setScienceCount((int) regionJson.get("36"));     //科技区投稿数(36)
-        online.setGuichuCount((int) regionJson.get("119"));     //鬼畜区投稿数(119)
-        online.setDanceCount((int) regionJson.get("129"));      //舞蹈区投稿数(129)
-        online.setFashionCount((int) regionJson.get("155"));    //时尚区投稿数(155)
-        online.setLifeCount((int) regionJson.get("160"));       //生活区投稿数(160)
-        online.setAdCount((int) regionJson.get("165"));         //广告区投稿数(165)
-        online.setGuochuangCount((int) regionJson.get("167"));  //国创区投稿数(167)
-        online.setProjectionCount((int) regionJson.get("177")); //放映厅区投稿数(177)
-        online.setMovieCount((int) regionJson.get("181"));      //影视区投稿数(181)
-        online.setDigitalCount((int) regionJson.get("188"));    //数码区投稿数(188)
+        online.setAnimaCount(regionJson.getInteger("1"));           //动画区投稿数(1)
+        online.setMusicCount(regionJson.getInteger("3"));           //音乐区投稿数(3)
+        online.setGanmeCount(regionJson.getInteger("4"));           //游戏区投稿数(4)
+        online.setVarietyCount(regionJson.getInteger("5"));         //娱乐区投稿数(5)
+        online.setDramaCount(regionJson.getInteger("13"));          //番剧区投稿数(13)
+        online.setPart23count(regionJson.getInteger("23"));         //未知分区23投稿数(23)
+        online.setScienceCount(regionJson.getInteger("36"));        //科技区投稿数(36)
+        online.setGuichuCount(regionJson.getInteger("119"));        //鬼畜区投稿数(119)
+        online.setDanceCount(regionJson.getInteger("129"));         //舞蹈区投稿数(129)
+        online.setFashionCount(regionJson.getInteger("155"));       //时尚区投稿数(155)
+        online.setLifeCount(regionJson.getInteger("160"));          //生活区投稿数(160)
+        online.setAdCount(regionJson.getInteger("165"));            //广告区投稿数(165)
+        online.setGuochuangCount(regionJson.getInteger("167"));     //国创区投稿数(167)
+        online.setProjectionCount(regionJson.getInteger("177"));    //放映厅区投稿数(177)
+        online.setMovieCount(regionJson.getInteger("181"));         //影视区投稿数(181)
+        online.setDigitalCount(regionJson.getInteger("188"));       //数码区投稿数(188)
         Date now = new Date();
         online.setCreated(now);
         online.setYear(now.getYear() + 1900);
@@ -124,5 +117,6 @@ public class OnlineThead extends Thread {
         OnlineRepository dao = applicationContext.getBean(OnlineRepository.class);
         dao.save(online);
         dao.flush();
+        logger.info("[online]\tdbsave\t" + no + "\t数据添加成功");
     }
 }
