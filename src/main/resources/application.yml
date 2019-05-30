@@ -24,13 +24,22 @@ spring:
         max-wait: 5000
         max-idle: -1
   thymeleaf:
-    mode: HTML # �÷��ϸ�� HTML
+    mode: HTML # 用非严格的 HTML
     prefix: classpath:/templates/ # Prefix that gets prepended to view names when building a URL.
     suffix: .html # Suffix that gets appended to view names when building a URL.
-    cache: false # ����ʱ�رջ���,��Ȼû������ʵʱҳ��
-volumes:
-  - /etc/timezone:/etc/timezone
-  - /etc/localtime:/etc/localtime
+    cache: false # 开发时关闭缓存,不然没法看到实时页面
+    # slf4j日志配置
+    logging:
+      # 配置级别
+      level:
+        #分包配置级别，即不同的目录下可以使用不同的级别
+        com.zyl.springboot: trace
+      # 指定输出日志的文件名，默认输出至当前项目目录下
+      file: bilibili.log
+
+#volumes:
+#  - /etc/timezone:/etc/timezone
+#  - /etc/localtime:/etc/localtime
 
 # API 接口
 # 主页

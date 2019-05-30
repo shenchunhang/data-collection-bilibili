@@ -19,12 +19,12 @@ import java.util.Date;
 
 /*
  *项目名: data-collection-bilibili
- *文件名: OnlineThead
+ *文件名: SearchBoxThread
  *创建者: SCH
- *创建时间:2019/5/29 9:37
- *描述: 获取 bilibili 在线人数,各分区投稿数
+ *创建时间:2019/5/30 16:00
+ *描述: 搜索框统计
  */
-public class OnlineThead extends Thread {
+public class SearchBoxThread extends Thread {
     private String path = "https://api.bilibili.com/x/web-interface/online?callback=jqueryCallback_bili_18984301554370875&jsonp=jsonp&_=1559098307094";
     private ApplicationContext applicationContext;
     private RedisUtil redisUtil;
@@ -33,11 +33,11 @@ public class OnlineThead extends Thread {
     private int ranS;
     private int waitTime;
 
-    public OnlineThead(ApplicationContext applicationContext) {
+    public SearchBoxThread(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 
-    public OnlineThead(ApplicationContext applicationContext, String path) {
+    public SearchBoxThread(ApplicationContext applicationContext, String path) {
         this.applicationContext = applicationContext;
         this.path = path;
     }
@@ -45,7 +45,7 @@ public class OnlineThead extends Thread {
     @Override
     public void run() {
         no = 1;
-        Logger logger = LoggerFactory.getLogger(Logger.class);
+        Logger logger = LoggerFactory.getLogger(getClass());
         while (true) {
             String res = collect(path);
             long nowTime = System.currentTimeMillis();
@@ -55,9 +55,11 @@ public class OnlineThead extends Thread {
             saveData(res);
             logger.info("save\t" + no + "\t" + now);
 //            System.out.println("save\t" + no + "\t" + now);
+            ranM = RandomUtil.randomInt(1, 10);
+            ranS = RandomUtil.randomInt(10, 20);
             waitTime = 1000 * 60 * 1;
             logger.info("wait\t" + no + "\t" + now + "\t");
-//            System.out.println("wait\t"+ no + "\t" + now + "\t");
+//            System.out.println("wait\t" + no + "\t" + now + "\t");
             no++;
             try {
                 Thread.sleep(waitTime);
