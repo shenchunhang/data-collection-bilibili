@@ -97,7 +97,6 @@ public class SearchBoxThread extends Thread {
         String showName = (String) dataJson.get("show_name");
         String dataJsonStr = dataJson.toJSONString();
         redisUtil = applicationContext.getBean(RedisUtil.class);
-
         if (redisUtil.sAdd("searchBoxShowName", showName) > 0) {
             if (redisUtil.sAdd("searchBox", dataJsonStr) > 0) {
                 logger.info("[searchBox]\trdsave\t" + no + "\t" + new Date());
@@ -111,10 +110,10 @@ public class SearchBoxThread extends Thread {
                 SearchBoxRepository repository = applicationContext.getBean(SearchBoxRepository.class);
                 repository.save(searchBox);
                 repository.flush();
-                System.out.println("[searchBox]\tdbsave\t" + no + "\t新数据添加成功");
+                logger.info("[searchBox]\tdbsave\t" + no + "\t新数据添加成功");
             }
         } else {
-            System.out.println("[searchBox]\tsavefail\t" + no + "\t数据重复,拒绝添加");
+            logger.info("[searchBox]\tsavefail\t" + no + "\t数据重复,拒绝添加");
         }
     }
 }
