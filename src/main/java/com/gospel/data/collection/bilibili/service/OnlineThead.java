@@ -88,7 +88,7 @@ public class OnlineThead extends Thread {
         String str = res.substring(res.indexOf("({") + 1, res.indexOf("})") + 1);
         Online online = new Online();
         JSONObject resJson = JSONObject.parseObject(str);
-        JSONObject dataJson = JSONObject.parseObject(resJson.get("data").toString());
+        JSONObject dataJson = JSONObject.parseObject(resJson.getString("data"));
         online.setWebOnline(dataJson.getInteger("web_online"));
         online.setPlayOnline(dataJson.getInteger("play_online"));
         online.setAllCount(dataJson.getInteger("all_count"));

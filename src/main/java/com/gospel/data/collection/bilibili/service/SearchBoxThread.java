@@ -93,7 +93,7 @@ public class SearchBoxThread extends Thread {
 
     private void saveData(String res, int no) {
         JSONObject resJson = JSONObject.parseObject(res);
-        JSONObject dataJson = JSONObject.parseObject(resJson.get("data").toString());
+        JSONObject dataJson = JSONObject.parseObject(resJson.getString("data"));
         String showName = (String) dataJson.get("show_name");
         String dataJsonStr = dataJson.toJSONString();
         redisUtil = applicationContext.getBean(RedisUtil.class);
