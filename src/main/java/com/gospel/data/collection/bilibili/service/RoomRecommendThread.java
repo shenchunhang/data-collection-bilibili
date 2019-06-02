@@ -57,7 +57,7 @@ public class RoomRecommendThread extends Thread {
             Date now = new Date();
             saveData(res);
             waitTime = 1000 * 60 * 1;
-            logger.info("[online]\twait\t" + no + "\t" + waitTime);
+            logger.info("[roomRecommend]\twait\t" + no + "\t" + waitTime);
             no++;
             try {
                 Thread.sleep(waitTime);
@@ -89,7 +89,7 @@ public class RoomRecommendThread extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        logger.info("[online]\tres \t" + no + "\t" + result);
+        logger.info("[roomRecommend]\tres \t" + no + "\t");
         return result.toString();
     }
 
@@ -119,7 +119,9 @@ public class RoomRecommendThread extends Thread {
             PreviewDTO previewDTO = previewDTOList.get(i);
             String previewDTOJson = JSONObject.toJSONString(previewDTO);
             if (redisUtil.sAdd("previewJson", previewDTOJson) > 0) {
-                logger.info("[previewJson]\t" + "resave");
+                logger.info("[previewJson]\tresave\t" + no + "\t数据添加成功");
+            } else {
+                logger.info("[previewJson]\tresave\t" + no + "\t第"+i+"数据重复,拒绝添加");
             }
         }
 
@@ -133,7 +135,9 @@ public class RoomRecommendThread extends Thread {
             String rankingDTOJson = JSONObject.toJSONString(rankingDTO);
             if (redisUtil.sAdd("rankingJson", rankingDTOJson) > 0) {
 
-                logger.info("[rankingJson]\t" + "resave\t" + rankingDTOJson);
+                logger.info("[rankingJson]\tresave\t" + no + "\t数据添加成功");
+            } else {
+                logger.info("[rankingJson]\tresave\t" + no + "\t第"+i+"数据重复,拒绝添加");
             }
         }
 
@@ -145,7 +149,9 @@ public class RoomRecommendThread extends Thread {
             RecommendDTO recommendDTO = recommendDTOList.get(i);
             String recommendDTOJson = JSONObject.toJSONString(recommendDTO);
             if (redisUtil.sAdd("recommendJson", recommendDTOJson) > 0) {
-                logger.info("[recommendJson]\t" + "resave\t" + recommendDTOJson);
+                logger.info("[recommendJson]\tresave\t" + no + "\t数据添加成功");
+            } else {
+                logger.info("[recommendJson]\tresave\t" + no + "\t第"+i+"数据重复,拒绝添加");
             }
         }
 

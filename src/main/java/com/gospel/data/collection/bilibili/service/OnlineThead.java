@@ -80,7 +80,7 @@ public class OnlineThead extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        logger.info("[online]\tres \t" + no + "\t" + result);
+        logger.info("[online]\tres \t" + no + "\t");
         return result.toString();
     }
 

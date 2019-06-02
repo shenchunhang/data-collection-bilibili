@@ -87,7 +87,7 @@ public class SearchBoxThread extends Thread {
             e.printStackTrace();
         }
 
-        logger.info("[searchBox]\tres \t" + no + "\t" + result);
+        logger.info("[searchBox]\tres \t" + no + "\t");
         return result.toString();
     }
 
@@ -99,7 +99,6 @@ public class SearchBoxThread extends Thread {
         redisUtil = applicationContext.getBean(RedisUtil.class);
         if (redisUtil.sAdd("searchBoxShowName", showName) > 0) {
             if (redisUtil.sAdd("searchBox", dataJsonStr) > 0) {
-                logger.info("[searchBox]\trdsave\t" + no + "\t" + new Date());
                 SearchBox searchBox = new SearchBox();
                 searchBox.setDataId(dataJson.getLong("id"));
                 searchBox.setShowName(dataJson.getString("show_name"));
