@@ -3,6 +3,7 @@ package com.gospel.data.collection.bilibili.pojo.entity;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
 
 /*
@@ -15,13 +16,11 @@ import java.util.Date;
 @Data
 @Entity
 public class RoomRecOnline {
+    @Id
     private int id;                 //id
     private int dynamic;            //动态条数
     private int onlineTotal;        //直播间个数
     private String link;            //热度链接
     private String text;            //热度标签
     private Date created;           //获取日期
-    private int year;               //获取年份
-    private int month;              //获取月份
-    private int day;                //获取号数
 }

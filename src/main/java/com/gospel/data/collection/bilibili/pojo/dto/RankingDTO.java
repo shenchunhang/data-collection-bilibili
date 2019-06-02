@@ -3,6 +3,7 @@ package com.gospel.data.collection.bilibili.pojo.dto;
 import lombok.Data;
 
 import java.security.PrivateKey;
+import java.util.Date;
 
 /*
  *项目名: data-collection-bilibili
@@ -19,4 +20,5 @@ public class RankingDTO {
     private String roomid;      //直播间ID
     private String title;       //标题
     private String uname;       //用户名
+    private Date created;       //获取时间
 }

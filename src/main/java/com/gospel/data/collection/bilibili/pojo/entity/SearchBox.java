@@ -23,5 +23,5 @@ public class SearchBox {
     private String name;        //av号
     private String seid;        //不知道什么东西
     private int type;           //不知道是什么类型
-    private Date created;
+    private Date created;       //获取时间
 }

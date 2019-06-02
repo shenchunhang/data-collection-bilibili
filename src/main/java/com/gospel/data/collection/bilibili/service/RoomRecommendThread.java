@@ -95,19 +95,16 @@ public class RoomRecommendThread extends Thread {
 
     private void saveData(String res) {
         JSONObject resJson = JSONObject.parseObject(res);
-        JSONObject dataJson = JSONObject.parseObject(resJson.getString("data"));
+        JSONObject dataJson = resJson.getJSONObject("data");
 
         //统计数据
         RoomRecOnline roomRecOnline = new RoomRecOnline();
         roomRecOnline.setDynamic(dataJson.getInteger("dynamic"));            //动态条数
         roomRecOnline.setOnlineTotal(dataJson.getInteger("online_total"));  //在线总数(直播间个数)
-        roomRecOnline.setLink(dataJson.getString("link"));
-        roomRecOnline.setText(dataJson.getString("text"));
-        Date now = new Date();
-        roomRecOnline.setCreated(now);
-        roomRecOnline.setYear(now.getYear() + 1900);
-        roomRecOnline.setMonth(now.getMonth() + 1);
-        roomRecOnline.setDay(now.getDate());
+        JSONObject text_linkJson = dataJson.getJSONObject("text_link");
+        roomRecOnline.setLink(text_linkJson.getString("link"));
+        roomRecOnline.setText(text_linkJson.getString("text"));
+        roomRecOnline.setCreated(new Date());
         RoomRecOnlineRepository roomRecOnlineRepository = applicationContext.getBean(RoomRecOnlineRepository.class);
         roomRecOnlineRepository.save(roomRecOnline);
         roomRecOnlineRepository.flush();
@@ -119,8 +116,10 @@ public class RoomRecommendThread extends Thread {
         JSONArray previewJson = dataJson.getJSONArray("preview");
         List<PreviewDTO> previewDTOList = previewJson.toJavaList(PreviewDTO.class);
         for (int i = 0; i < previewDTOList.size(); i++) {
-            if (redisUtil.sAdd("previewJson", previewDTOList.get(i).toString()) > 0) {
-
+            PreviewDTO previewDTO = previewDTOList.get(i);
+            String previewDTOJson = JSONObject.toJSONString(previewDTO);
+            if (redisUtil.sAdd("previewJson", previewDTOJson) > 0) {
+                logger.info("[previewJson]\t" + "resave");
             }
         }
 
@@ -130,8 +129,11 @@ public class RoomRecommendThread extends Thread {
         JSONArray rankingJson = dataJson.getJSONArray("ranking");
         List<RankingDTO> rankingDTOList = rankingJson.toJavaList(RankingDTO.class);
         for (int i = 0; i < rankingDTOList.size(); i++) {
-            if (redisUtil.sAdd("rankingJson", rankingDTOList.get(i).toString()) > 0) {
+            RankingDTO rankingDTO = rankingDTOList.get(i);
+            String rankingDTOJson = JSONObject.toJSONString(rankingDTO);
+            if (redisUtil.sAdd("rankingJson", rankingDTOJson) > 0) {
 
+                logger.info("[rankingJson]\t" + "resave\t" + rankingDTOJson);
             }
         }
 
@@ -140,8 +142,10 @@ public class RoomRecommendThread extends Thread {
         JSONArray recommendJson = dataJson.getJSONArray("recommend");
         List<RecommendDTO> recommendDTOList = recommendJson.toJavaList(RecommendDTO.class);
         for (int i = 0; i < rankingDTOList.size(); i++) {
-            if (redisUtil.sAdd("recommendJson", recommendDTOList.get(i).toString()) > 0) {
-
+            RecommendDTO recommendDTO = recommendDTOList.get(i);
+            String recommendDTOJson = JSONObject.toJSONString(recommendDTO);
+            if (redisUtil.sAdd("recommendJson", recommendDTOJson) > 0) {
+                logger.info("[recommendJson]\t" + "resave\t" + recommendDTOJson);
             }
         }
 

@@ -1,5 +1,7 @@
 package com.gospel.data.collection.bilibili.pojo.dto;
 
+import java.util.Date;
+
 /*
  *项目名: data-collection-bilibili
  *文件名: RecommendDTO
@@ -23,4 +25,5 @@ public class RecommendDTO {
     private String system_cover;        //直播间内容截图
     private String title;               //直播间标题 "KPL春季赛决赛 赛前表演赛"
     private String uname;               //播主用户名
+    private Date created;               //获取时间
 }

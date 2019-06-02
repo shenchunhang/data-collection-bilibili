@@ -16,7 +16,7 @@ import java.util.Date;
 @Data
 public class PreviewDTO {
     private String pic;     //宣传图链接
-    private double remark;  //备注
+    private String remark;  //备注
     private String title;   //标题
     private String url;     //活动链接
     private Date created;   //收集时间
