@@ -38,7 +38,4 @@ public class Online {
     private int movieCount;         //影视区投稿数(181)
     private int digitalCount;       //数码区投稿数(188)
     private Date created;           //获取时间
-    private int year;               //获取年份
-    private int month;              //获取月份
-    private int day;                //获取号数
 }

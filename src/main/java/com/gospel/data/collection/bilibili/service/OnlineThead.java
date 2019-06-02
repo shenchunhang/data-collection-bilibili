@@ -109,11 +109,7 @@ public class OnlineThead extends Thread {
         online.setProjectionCount(regionJson.getInteger("177"));    //放映厅区投稿数(177)
         online.setMovieCount(regionJson.getInteger("181"));         //影视区投稿数(181)
         online.setDigitalCount(regionJson.getInteger("188"));       //数码区投稿数(188)
-        Date now = new Date();
-        online.setCreated(now);
-        online.setYear(now.getYear() + 1900);
-        online.setMonth(now.getMonth() + 1);
-        online.setDay(now.getDate());
+        online.setCreated(new Date());
         OnlineRepository dao = applicationContext.getBean(OnlineRepository.class);
         dao.save(online);
         dao.flush();
