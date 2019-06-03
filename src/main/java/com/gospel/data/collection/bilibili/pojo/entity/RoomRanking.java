@@ -2,6 +2,8 @@ package com.gospel.data.collection.bilibili.pojo.entity;
 
 import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
 
 /*
@@ -12,7 +14,9 @@ import java.util.Date;
  *描述: TODO
  */
 @Data
+@Entity
 public class RoomRanking {
+    @Id
     private long id;
     private String face;        //封面链接
     private String link;        //视频链接

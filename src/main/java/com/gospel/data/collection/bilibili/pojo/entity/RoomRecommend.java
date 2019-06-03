@@ -1,7 +1,11 @@
 package com.gospel.data.collection.bilibili.pojo.entity;
 
 import lombok.Data;
+import lombok.Value;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
 
 /*
@@ -12,16 +16,23 @@ import java.util.Date;
  *描述: TODO
  */
 @Data
+@Entity
 public class RoomRecommend {
+    @Id
+    private long id;
     private String areaId;              //直播分区ID
     private String areaName;            //直播分区名字
+    @Column(name = "area_v2_id")
     private String areaV2Id;            //直播分区ID
+    @Column(name = "area_v2_name")
     private String areaV2Name;          //直播分区名字
+    @Column(name = "area_v2_parent_id")
     private String areaV2ParentId;      //直播父分区ID
+    @Column(name = "area_v2_parent_name")
     private String areaV2ParentName;    //直播父分区名字
     private String face;                //用户头像
     private String link;                //直播间链接
-    private String online;              //直播间人数
+    private int online;                 //直播间人数
     private String pic;                 //直播封面
     private String remark;              //标题
     private String roomid;              //直播间ID
