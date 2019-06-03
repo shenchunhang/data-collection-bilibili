@@ -2,11 +2,15 @@ package com.gospel.data.collection.bilibili.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.gospel.data.collection.bilibili.pojo.dto.PreviewDTO;
-import com.gospel.data.collection.bilibili.pojo.dto.RankingDTO;
-import com.gospel.data.collection.bilibili.pojo.dto.RecommendDTO;
-import com.gospel.data.collection.bilibili.pojo.entity.RoomRecOnline;
-import com.gospel.data.collection.bilibili.repository.RoomRecOnlineRepository;
+import com.gospel.data.collection.bilibili.pojo.dto.RoomPreviewDTO;
+import com.gospel.data.collection.bilibili.pojo.dto.RoomRankingDTO;
+import com.gospel.data.collection.bilibili.pojo.dto.RoomRecommendDTO;
+import com.gospel.data.collection.bilibili.pojo.entity.RoomOnline;
+import com.gospel.data.collection.bilibili.pojo.entity.RoomPreview;
+import com.gospel.data.collection.bilibili.pojo.entity.RoomRanking;
+import com.gospel.data.collection.bilibili.repository.RoomOnlineRepository;
+import com.gospel.data.collection.bilibili.repository.RoomPreviewRepository;
+import com.gospel.data.collection.bilibili.repository.RoomRankingRepository;
 import com.gospel.data.collection.bilibili.util.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,7 +93,7 @@ public class RoomRecommendThread extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        logger.info("[roomRecommend]\tres \t" + no + "\t");
+        logger.info("[roomRecommend]\tres \t" + no);
         return result.toString();
     }
 
@@ -98,60 +102,65 @@ public class RoomRecommendThread extends Thread {
         JSONObject dataJson = resJson.getJSONObject("data");
 
         //统计数据
-        RoomRecOnline roomRecOnline = new RoomRecOnline();
-        roomRecOnline.setDynamic(dataJson.getInteger("dynamic"));            //动态条数
-        roomRecOnline.setOnlineTotal(dataJson.getInteger("online_total"));  //在线总数(直播间个数)
+        RoomOnline roomOnline = new RoomOnline();
+        roomOnline.setDynamic(dataJson.getInteger("dynamic"));            //动态条数
+        roomOnline.setOnlineTotal(dataJson.getInteger("online_total"));  //在线总数(直播间个数)
         JSONObject text_linkJson = dataJson.getJSONObject("text_link");
-        roomRecOnline.setLink(text_linkJson.getString("link"));
-        roomRecOnline.setText(text_linkJson.getString("text"));
-        roomRecOnline.setCreated(new Date());
-        RoomRecOnlineRepository roomRecOnlineRepository = applicationContext.getBean(RoomRecOnlineRepository.class);
-        roomRecOnlineRepository.save(roomRecOnline);
-        roomRecOnlineRepository.flush();
+        roomOnline.setLink(text_linkJson.getString("link"));
+        roomOnline.setText(text_linkJson.getString("text"));
+        roomOnline.setCreated(new Date());
+        RoomOnlineRepository roomOnlineRepository = applicationContext.getBean(RoomOnlineRepository.class);
+        roomOnlineRepository.save(roomOnline);
+        roomOnlineRepository.flush();
         logger.info("[roomRecOnline]\tdbsave\t" + no + "\t数据添加成功");
-
 
         redisUtil = applicationContext.getBean(RedisUtil.class);
         //主页-正在直播-为你推荐-(活动)
         JSONArray previewJson = dataJson.getJSONArray("preview");
-        List<PreviewDTO> previewDTOList = previewJson.toJavaList(PreviewDTO.class);
-        for (int i = 0; i < previewDTOList.size(); i++) {
-            PreviewDTO previewDTO = previewDTOList.get(i);
-            String previewDTOJson = JSONObject.toJSONString(previewDTO);
-            if (redisUtil.sAdd("previewJson", previewDTOJson) > 0) {
-                logger.info("[previewJson]\tresave\t" + no + "\t数据添加成功");
+        List<RoomPreview> roomPreviewList = previewJson.toJavaList(RoomPreview.class);
+        RoomPreviewRepository roomPreviewRepository = applicationContext.getBean(RoomPreviewRepository.class);
+        for (int i = 0; i < roomPreviewList.size(); i++) {
+            RoomPreview roomPreview = roomPreviewList.get(i);
+            String roomPreviewDTOJson = JSONObject.toJSONString(roomPreview);
+            if (redisUtil.sAdd("previewJson", roomPreviewDTOJson) > 0) {
+                logger.info("[previewJson]\tresave\t" + no + "\t第" + i + "条数据添加成功");
+                roomPreview.setCreated(new Date());
+                roomPreviewRepository.save(roomPreview);
+                roomPreviewRepository.flush();
+                logger.info("[previewJson]\tdbsave\t" + no + "\t第" + i + "条数据添加成功");
             } else {
-                logger.info("[previewJson]\tresave\t" + no + "\t第"+i+"数据重复,拒绝添加");
+                logger.info("[previewJson]\tresave\t" + no + "\t第" + i + "条数据重复,拒绝添加");
             }
         }
-
 
         //直播排名
-
         JSONArray rankingJson = dataJson.getJSONArray("ranking");
-        List<RankingDTO> rankingDTOList = rankingJson.toJavaList(RankingDTO.class);
-        for (int i = 0; i < rankingDTOList.size(); i++) {
-            RankingDTO rankingDTO = rankingDTOList.get(i);
-            String rankingDTOJson = JSONObject.toJSONString(rankingDTO);
-            if (redisUtil.sAdd("rankingJson", rankingDTOJson) > 0) {
-
-                logger.info("[rankingJson]\tresave\t" + no + "\t数据添加成功");
+        List<RoomRanking> roomRankingList = rankingJson.toJavaList(RoomRanking.class);
+        RoomRankingRepository roomRankingRepository = applicationContext.getBean(RoomRankingRepository.class);
+        for (int i = 0; i < roomRankingList.size(); i++) {
+            RoomRanking roomRanking = roomRankingList.get(i);
+            String roomRankingDTOJson = JSONObject.toJSONString(roomRanking);
+            if (redisUtil.sAdd("rankingJson", roomRankingDTOJson) > 0) {
+                logger.info("[rankingJson]\tresave\t" + no + "\t第" + i + "条数据添加成功");
+                roomRanking.setCreated(new Date());
+                roomRankingRepository.save(roomRanking);
+                roomRankingRepository.flush();
+                logger.info("[rankingJson]\tdbsave\t" + no + "\t第" + i + "条数据添加成功");
             } else {
-                logger.info("[rankingJson]\tresave\t" + no + "\t第"+i+"数据重复,拒绝添加");
+                logger.info("[rankingJson]\tresave\t" + no + "\t第" + i + "条数据重复,拒绝添加");
             }
         }
-
 
         //主页-正在直播-推荐直播
         JSONArray recommendJson = dataJson.getJSONArray("recommend");
-        List<RecommendDTO> recommendDTOList = recommendJson.toJavaList(RecommendDTO.class);
-        for (int i = 0; i < rankingDTOList.size(); i++) {
-            RecommendDTO recommendDTO = recommendDTOList.get(i);
-            String recommendDTOJson = JSONObject.toJSONString(recommendDTO);
-            if (redisUtil.sAdd("recommendJson", recommendDTOJson) > 0) {
-                logger.info("[recommendJson]\tresave\t" + no + "\t数据添加成功");
+        List<RoomRecommendDTO> roomRecommendDTOS = recommendJson.toJavaList(RoomRecommendDTO.class);
+        for (int i = 0; i < roomRecommendDTOS.size(); i++) {
+            RoomRecommendDTO roomRecommendDTO = roomRecommendDTOS.get(i);
+            String roomRecommendDTOJson = JSONObject.toJSONString(roomRecommendDTO);
+            if (redisUtil.sAdd("recommendJson", roomRecommendDTOJson) > 0) {
+                logger.info("[recommendJson]\tresave\t" + no + "\t第" + i + "条数据添加成功");
             } else {
-                logger.info("[recommendJson]\tresave\t" + no + "\t第"+i+"数据重复,拒绝添加");
+                logger.info("[recommendJson]\tresave\t" + no + "\t第" + i + "条数据重复,拒绝添加");
             }
         }
 

@@ -14,10 +14,9 @@ import java.util.Date;
  *      description: 主页-正在直播-为你推荐
  */
 @Data
-public class PreviewDTO {
+public class RoomPreviewDTO {
     private String pic;     //宣传图链接
     private String remark;  //备注
     private String title;   //标题
     private String url;     //活动链接
-    private Date created;   //收集时间
 }

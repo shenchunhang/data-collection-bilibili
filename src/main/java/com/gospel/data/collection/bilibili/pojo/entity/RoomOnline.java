@@ -15,7 +15,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-public class RoomRecOnline {
+public class RoomOnline {
     @Id
     private int id;                 //id
     private int dynamic;            //动态条数

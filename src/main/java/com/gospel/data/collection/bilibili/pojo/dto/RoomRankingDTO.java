@@ -13,12 +13,11 @@ import java.util.Date;
  *描述: TODO
  */
 @Data
-public class RankingDTO {
+public class RoomRankingDTO {
     private String face;        //封面链接
     private String link;        //视频链接
     private String online;      //直播间人数
     private String roomid;      //直播间ID
     private String title;       //标题
     private String uname;       //用户名
-    private Date created;       //获取时间
 }

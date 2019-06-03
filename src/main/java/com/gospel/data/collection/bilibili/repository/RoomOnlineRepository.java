@@ -1,6 +1,6 @@
 package com.gospel.data.collection.bilibili.repository;
 
-import com.gospel.data.collection.bilibili.pojo.entity.RoomRecOnline;
+import com.gospel.data.collection.bilibili.pojo.entity.RoomOnline;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /*
@@ -10,5 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *创建时间:2019/6/2 17:32
  *描述: TODO
  */
-public interface RoomRecOnlineRepository extends JpaRepository<RoomRecOnline, Long> {
+public interface RoomOnlineRepository extends JpaRepository<RoomOnline, Long> {
 }
