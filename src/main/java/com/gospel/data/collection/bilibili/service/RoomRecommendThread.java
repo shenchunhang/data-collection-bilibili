@@ -8,9 +8,11 @@ import com.gospel.data.collection.bilibili.pojo.dto.RoomRecommendDTO;
 import com.gospel.data.collection.bilibili.pojo.entity.RoomOnline;
 import com.gospel.data.collection.bilibili.pojo.entity.RoomPreview;
 import com.gospel.data.collection.bilibili.pojo.entity.RoomRanking;
+import com.gospel.data.collection.bilibili.pojo.entity.RoomRecommend;
 import com.gospel.data.collection.bilibili.repository.RoomOnlineRepository;
 import com.gospel.data.collection.bilibili.repository.RoomPreviewRepository;
 import com.gospel.data.collection.bilibili.repository.RoomRankingRepository;
+import com.gospel.data.collection.bilibili.repository.RoomRecommendRepository;
 import com.gospel.data.collection.bilibili.util.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -154,11 +156,14 @@ public class RoomRecommendThread extends Thread {
         //主页-正在直播-推荐直播
         JSONArray recommendJson = dataJson.getJSONArray("recommend");
         List<RoomRecommendDTO> roomRecommendDTOS = recommendJson.toJavaList(RoomRecommendDTO.class);
+        RoomRecommendRepository roomRecommendRepository = applicationContext.getBean(RoomRecommendRepository.class);
         for (int i = 0; i < roomRecommendDTOS.size(); i++) {
             RoomRecommendDTO roomRecommendDTO = roomRecommendDTOS.get(i);
             String roomRecommendDTOJson = JSONObject.toJSONString(roomRecommendDTO);
             if (redisUtil.sAdd("recommendJson", roomRecommendDTOJson) > 0) {
                 logger.info("[recommendJson]\tresave\t" + no + "\t第" + i + "条数据添加成功");
+                RoomRecommend roomRecommend = new RoomRecommend();
+                roomRecommend.setAreaId(roomRecommendDTO.getAreaId());
             } else {
                 logger.info("[recommendJson]\tresave\t" + no + "\t第" + i + "条数据重复,拒绝添加");
             }

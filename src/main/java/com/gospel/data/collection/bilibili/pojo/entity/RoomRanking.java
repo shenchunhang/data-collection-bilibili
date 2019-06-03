@@ -13,9 +13,10 @@ import java.util.Date;
  */
 @Data
 public class RoomRanking {
+    private long id;
     private String face;        //封面链接
     private String link;        //视频链接
-    private String online;      //直播间人数
+    private int online;      //直播间人数
     private String roomid;      //直播间ID
     private String title;       //标题
     private String uname;       //用户名
