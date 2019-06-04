@@ -2,9 +2,6 @@ package com.gospel.data.collection.bilibili.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.gospel.data.collection.bilibili.pojo.dto.RoomPreviewDTO;
-import com.gospel.data.collection.bilibili.pojo.dto.RoomRankingDTO;
-import com.gospel.data.collection.bilibili.pojo.dto.RoomRecommendDTO;
 import com.gospel.data.collection.bilibili.pojo.entity.RoomOnline;
 import com.gospel.data.collection.bilibili.pojo.entity.RoomPreview;
 import com.gospel.data.collection.bilibili.pojo.entity.RoomRanking;
@@ -155,15 +152,17 @@ public class RoomRecommendThread extends Thread {
 
         //主页-正在直播-推荐直播
         JSONArray recommendJson = dataJson.getJSONArray("recommend");
-        List<RoomRecommendDTO> roomRecommendDTOS = recommendJson.toJavaList(RoomRecommendDTO.class);
+//        List<RoomRecommendDTO> roomRecommendDTOS = recommendJson.toJavaList(RoomRecommendDTO.class);
+        List<RoomRecommend> roomRecommendDTOS = recommendJson.toJavaList(RoomRecommend.class);
         RoomRecommendRepository roomRecommendRepository = applicationContext.getBean(RoomRecommendRepository.class);
         for (int i = 0; i < roomRecommendDTOS.size(); i++) {
-            RoomRecommendDTO roomRecommendDTO = roomRecommendDTOS.get(i);
+            RoomRecommend roomRecommendDTO = roomRecommendDTOS.get(i);
             String roomRecommendDTOJson = JSONObject.toJSONString(roomRecommendDTO);
             if (redisUtil.sAdd("recommendJson", roomRecommendDTOJson) > 0) {
                 logger.info("[recommendJson]\tresave\t" + no + "\t第" + i + "条数据添加成功");
-                RoomRecommend roomRecommend = new RoomRecommend();
-                roomRecommend.setAreaId(roomRecommendDTO.getAreaId());
+                roomRecommendDTO.setCreated(new Date());
+                roomRecommendRepository.save(roomRecommendDTO);
+                roomRecommendRepository.flush();
             } else {
                 logger.info("[recommendJson]\tresave\t" + no + "\t第" + i + "条数据重复,拒绝添加");
             }

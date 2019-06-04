@@ -17,7 +17,7 @@ public class Application {
         ApplicationContext applicationContext = SpringUtil.getApplicationContext();//通用springIOC上下文对象
         new OnlineThead(applicationContext).start();//online 接口
         new SearchBoxThread(applicationContext).start();//searchBox 接口
-        new RoomRecommendThread(applicationContext).start();
+        new RoomRecommendThread(applicationContext).start();//Roomrecommond 接口
     }
 
 }
