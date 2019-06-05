@@ -14,7 +14,7 @@ import java.util.Date;
  *创建时间:2019/6/4 22:33
  *描述: TODO
  */
-public class PgcWebRankListThread {
+public class PgcWebRankListThread extends Thread {
     private String path = "https://api.bilibili.com/pgc/web/rank/list?season_type=1&day=3";
     private ApplicationContext applicationContext;
     private RedisUtil redisUtil;
@@ -39,6 +39,7 @@ public class PgcWebRankListThread {
 
     @Override
     public void run() {
+        path = "https://api.bilibili.com/pgc/web/rank/list?season_type=" + seasonType + "&day=" + day;
         no = 1;
         logger = LoggerFactory.getLogger(Logger.class);
         while (true) {
