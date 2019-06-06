@@ -43,73 +43,73 @@ spring:
 
 # API 接口
 # 主页
-index:
-  x-web-interface-search-default: https://api.bilibili.com/x/web-interface/search/default                               # indexPage--搜索框
-  index-recommend: https://www.bilibili.com/index/recommend.json                                                        # indexPage--推荐
-  # 主页--在线人数
-  x-web-interface-online: https://api.bilibili.com/x/web-interface/online?callback=jqueryCallback_bili_8790104256927396&jsonp=jsonp&_=1559048160653
-  room-v1-RoomRecommend-biliIndexRecList: https://api.live.bilibili.com/room/v1/RoomRecommend/biliIndexRecList          # indexPage--直播排行
-  pgc-web-timeline: https://api.bilibili.com/pgc/web/timeline?types=1                                                   # indexPage--番剧
-  # 『连载动画』投稿在 2019年05月25日 - 2019年05月28日 的数据综合得分，每日更新一次
-  pgc-web-rank-list: https://api.bilibili.com/pgc/web/rank/list?season_type=1&day=3
-  # 主页-动画,  rid:1,  tname:MMD·3D
-  x-web-interface-dynamic-region-1: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_9617967223198589&jsonp=jsonp&ps=10&rid=1&_=1559041446677
-  x-web-interface-dynamic-region-1-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_15392723810828834&rid=1&day=3&original=0&jsonp=jsonp&_=1559041446678
-
-  # 主页-番剧动态,  rid:13
-  x-web-interface-dynamic-region-13: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_1557794292463961&jsonp=jsonp&ps=10&rid=13&_=1559048160659
-  # 主页-国产原创相关,  rid:168
-  x-web-interface-dynamic-region-168: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=168
-  x-web-interface-dynamic-region-168-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=168&day=3&original=0
-
-  # 主页-音乐,  rid:3
-  x-web-interface-dynamic-region-3: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_5715392394722729&jsonp=jsonp&ps=10&rid=3&_=1559053160000
-  x-web-interface-dynamic-region-3-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_08179562081053349&rid=3&day=3&original=0&jsonp=jsonp&_=1559053160001
-  # 主页-舞蹈,  rid:129
-  x-web-interface-dynamic-region-129: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_08787447063452469&jsonp=jsonp&ps=10&rid=129&_=1559053160006
-  x-web-interface-dynamic-region-129-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_6502909469618496&rid=129&day=3&original=0&jsonp=jsonp&_=1559053160007
-  # 主页-游戏,  rid:4
-  x-web-interface-dynamic-region-4: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_1610780009443813&jsonp=jsonp&ps=10&rid=4&_=1559053160016
-  x-web-interface-dynamic-region-4-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_30598136905451123&rid=4&day=3&original=0&jsonp=jsonp&_=1559053160017
-  x-web-interface-ranking-region-155: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_8309136277926077&rid=155&day=3&original=1&jsonp=jsonp&_=1559048160702
-
-  # rid:  33���ض���, 32��ᶯ��, 51��Ѷ��Ƶ, 152�ٷ�����, 153��������, 168����ԭ�����, 169����Ϸ, 195��̬�����㲥��
-  # day:  3����3��,7����һ��      original:  0���а� ����������� �������
-anime:
-  api-timeline_v2_global: https://bangumi.bilibili.com/api/timeline_v2_global                                           # ������--�������
-
-
-  x-web-interface-dynamic-region-33: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=33               # ������--���ض���
-  x-web-interface-ranking-region: https://api.bilibili.com/x/web-interface/ranking/region?rid=33&day=3&original=0       # ������--���ض���--����
-  x-web-interface-dynamic-region-32: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=32               # ������--��ᶯ��
-  x-web-interface-dynamic-region-32-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=32&day=3&original=0  # ������--��ᶯ��--����
-  x-web-interface-dynamic-region-51: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=51               # ������--��Ѷ��Ƶ
-  x-web-interface-dynamic-region-51-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=51&day=3&original=0  # ������--��Ѷ��Ƶ--����
-  x-web-interface-dynamic-region-152: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=152             # ������--�ٷ�����
-  x-web-interface-dynamic-region-152-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=152&day=3&original=0 #������--�ٷ�����--����
-china:
-  api-timeline_v2_cn: https://bangumi.bilibili.com/api/timeline_v2_cn                                                   # ������--�������
-  x-web-interface-dynamic-region-153: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=153             # ������--��������
-  x-web-interface-ranking-region: https://api.bilibili.com/x/web-interface/ranking/region?rid=153&day=3&original=0      # ������--��������--����
-  x-web-interface-dynamic-region-168: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=168             # ������--����ԭ�����
-  x-web-interface-dynamic-region-168-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=168&day=3&original=0 #������--����ԭ�����--����
-  x-web-interface-dynamic-region-169: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=169             # ������--����Ϸ
-  x-web-interface-dynamic-region-169-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=169&day=3&original=0 #������--����Ϸ--����
-  x-web-interface-dynamic-region-195: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=195             # ������--��̬�����㲥��
-  x-web-interface-dynamic-region-195-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=195&day=3&original=0 #������--��̬�����㲥��--����
-  x-web-interface-dynamic-region-170: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=170             # ������--��Ѷ
-  x-web-interface-dynamic-region-170-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=170&day=3&original=0 #������--��Ѷ--����
-music:
-  com/x/web-show/res/locs?callback=jqueryCallback_bili_2708746153163466&pf=0&ids=1580%2C2837%2C2836%2C2870%2C2953%2C2954%2C2955%2C2956&jsonp=jsonp&_=1559020292685:
-  com/x/web-show/res/locs?callback=jqueryCallback_bili_3372265140559396&jsonp=jsonp&pf=0&ids=58&_=1559020292689:
-  # ԭ������
-  com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_13564981245969387&jsonp=jsonp&ps=15&rid=28&_=1559020292706:
-  # ԭ������--����
-  com/x/web-interface/ranking/region?callback=jqueryCallback_bili_23087460560838835&rid=28&day=3&original=0&jsonp=jsonp&_=1559020292707:
-  # ��ȡ��ǩ
-  com-x-tag-hots:
-  com/x/tag/hots?callback=jqueryCallback_bili_4875853551289475&jsonp=jsonp&type=0&rid=28&_=1559020293104:
-  # ����
-  com-x-web-interface-dynamic-region: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_44060654452118864&jsonp=jsonp&ps=15&rid=31&_=1559020732659
-  # ����--����
-  com-x-web-interface-dynamic-region-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_44224667989612154&rid=31&day=3&original=0&jsonp=jsonp&_=1559020732661
+#index:
+#  x-web-interface-search-default: https://api.bilibili.com/x/web-interface/search/default                               # indexPage--搜索框
+#  index-recommend: https://www.bilibili.com/index/recommend.json                                                        # indexPage--推荐
+#  # 主页--在线人数
+#  x-web-interface-online: https://api.bilibili.com/x/web-interface/online?callback=jqueryCallback_bili_8790104256927396&jsonp=jsonp&_=1559048160653
+#  room-v1-RoomRecommend-biliIndexRecList: https://api.live.bilibili.com/room/v1/RoomRecommend/biliIndexRecList          # indexPage--直播排行
+#  pgc-web-timeline: https://api.bilibili.com/pgc/web/timeline?types=1                                                   # indexPage--番剧
+#  # 『连载动画』投稿在 2019年05月25日 - 2019年05月28日 的数据综合得分，每日更新一次
+#  pgc-web-rank-list: https://api.bilibili.com/pgc/web/rank/list?season_type=1&day=3
+#  # 主页-动画,  rid:1,  tname:MMD·3D
+#  x-web-interface-dynamic-region-1: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_9617967223198589&jsonp=jsonp&ps=10&rid=1&_=1559041446677
+#  x-web-interface-dynamic-region-1-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_15392723810828834&rid=1&day=3&original=0&jsonp=jsonp&_=1559041446678
+#
+#  # 主页-番剧动态,  rid:13
+#  x-web-interface-dynamic-region-13: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_1557794292463961&jsonp=jsonp&ps=10&rid=13&_=1559048160659
+#  # 主页-国产原创相关,  rid:168
+#  x-web-interface-dynamic-region-168: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=168
+#  x-web-interface-dynamic-region-168-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=168&day=3&original=0
+#
+#  # 主页-音乐,  rid:3
+#  x-web-interface-dynamic-region-3: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_5715392394722729&jsonp=jsonp&ps=10&rid=3&_=1559053160000
+#  x-web-interface-dynamic-region-3-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_08179562081053349&rid=3&day=3&original=0&jsonp=jsonp&_=1559053160001
+#  # 主页-舞蹈,  rid:129
+#  x-web-interface-dynamic-region-129: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_08787447063452469&jsonp=jsonp&ps=10&rid=129&_=1559053160006
+#  x-web-interface-dynamic-region-129-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_6502909469618496&rid=129&day=3&original=0&jsonp=jsonp&_=1559053160007
+#  # 主页-游戏,  rid:4
+#  x-web-interface-dynamic-region-4: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_1610780009443813&jsonp=jsonp&ps=10&rid=4&_=1559053160016
+#  x-web-interface-dynamic-region-4-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_30598136905451123&rid=4&day=3&original=0&jsonp=jsonp&_=1559053160017
+#  x-web-interface-ranking-region-155: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_8309136277926077&rid=155&day=3&original=1&jsonp=jsonp&_=1559048160702
+#
+#  # rid:  33���ض���, 32��ᶯ��, 51��Ѷ��Ƶ, 152�ٷ�����, 153��������, 168����ԭ�����, 169����Ϸ, 195��̬�����㲥��
+#  # day:  3����3��,7����һ��      original:  0���а� ����������� �������
+#anime:
+#  api-timeline_v2_global: https://bangumi.bilibili.com/api/timeline_v2_global                                           # ������--�������
+#
+#
+#  x-web-interface-dynamic-region-33: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=33               # ������--���ض���
+#  x-web-interface-ranking-region: https://api.bilibili.com/x/web-interface/ranking/region?rid=33&day=3&original=0       # ������--���ض���--����
+#  x-web-interface-dynamic-region-32: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=32               # ������--��ᶯ��
+#  x-web-interface-dynamic-region-32-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=32&day=3&original=0  # ������--��ᶯ��--����
+#  x-web-interface-dynamic-region-51: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=51               # ������--��Ѷ��Ƶ
+#  x-web-interface-dynamic-region-51-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=51&day=3&original=0  # ������--��Ѷ��Ƶ--����
+#  x-web-interface-dynamic-region-152: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=152             # ������--�ٷ�����
+#  x-web-interface-dynamic-region-152-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=152&day=3&original=0 #������--�ٷ�����--����
+#china:
+#  api-timeline_v2_cn: https://bangumi.bilibili.com/api/timeline_v2_cn                                                   # ������--�������
+#  x-web-interface-dynamic-region-153: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=153             # ������--��������
+#  x-web-interface-ranking-region: https://api.bilibili.com/x/web-interface/ranking/region?rid=153&day=3&original=0      # ������--��������--����
+#  x-web-interface-dynamic-region-168: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=168             # ������--����ԭ�����
+#  x-web-interface-dynamic-region-168-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=168&day=3&original=0 #������--����ԭ�����--����
+#  x-web-interface-dynamic-region-169: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=169             # ������--����Ϸ
+#  x-web-interface-dynamic-region-169-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=169&day=3&original=0 #������--����Ϸ--����
+#  x-web-interface-dynamic-region-195: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=195             # ������--��̬�����㲥��
+#  x-web-interface-dynamic-region-195-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=195&day=3&original=0 #������--��̬�����㲥��--����
+#  x-web-interface-dynamic-region-170: https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&rid=170             # ������--��Ѷ
+#  x-web-interface-dynamic-region-170-0: https://api.bilibili.com/x/web-interface/ranking/region?rid=170&day=3&original=0 #������--��Ѷ--����
+#music:
+#  com/x/web-show/res/locs?callback=jqueryCallback_bili_2708746153163466&pf=0&ids=1580%2C2837%2C2836%2C2870%2C2953%2C2954%2C2955%2C2956&jsonp=jsonp&_=1559020292685:
+#  com/x/web-show/res/locs?callback=jqueryCallback_bili_3372265140559396&jsonp=jsonp&pf=0&ids=58&_=1559020292689:
+#  # ԭ������
+#  com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_13564981245969387&jsonp=jsonp&ps=15&rid=28&_=1559020292706:
+#  # ԭ������--����
+#  com/x/web-interface/ranking/region?callback=jqueryCallback_bili_23087460560838835&rid=28&day=3&original=0&jsonp=jsonp&_=1559020292707:
+#  # ��ȡ��ǩ
+#  com-x-tag-hots:
+#  com/x/tag/hots?callback=jqueryCallback_bili_4875853551289475&jsonp=jsonp&type=0&rid=28&_=1559020293104:
+#  # ����
+#  com-x-web-interface-dynamic-region: https://api.bilibili.com/x/web-interface/dynamic/region?callback=jqueryCallback_bili_44060654452118864&jsonp=jsonp&ps=15&rid=31&_=1559020732659
+#  # ����--����
+#  com-x-web-interface-dynamic-region-0: https://api.bilibili.com/x/web-interface/ranking/region?callback=jqueryCallback_bili_44224667989612154&rid=31&day=3&original=0&jsonp=jsonp&_=1559020732661
