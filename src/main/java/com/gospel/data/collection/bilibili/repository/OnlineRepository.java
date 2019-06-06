@@ -17,8 +17,8 @@ import java.util.List;
  */
 public interface OnlineRepository extends JpaRepository<Online, Long> {
     //根据编号查询
-    @Query(value = "select * from online where year = %?1% and month = %?2%", nativeQuery = true)
-    @Modifying
-    List<Online> findByYearAndMouth(Date year, int month);
+//    @Query(value = "select * from online where year = %?1% and month = %?2%", nativeQuery = true)
+//    @Modifying
+//    List<Online> findByYearAndMouth(Date year, int month);
 
 }
