@@ -94,6 +94,9 @@ public class SearchBoxThread extends Thread {
     private void saveData(String res, int no) {
         JSONObject resJson = JSONObject.parseObject(res);
         JSONObject dataJson = JSONObject.parseObject(resJson.getString("data"));
+        if (dataJson.isEmpty()) {
+            logger.warn("[searchBox]\tdbsave\t" + no + "\tB站返回数据异常");
+        }
         String showName = (String) dataJson.get("show_name");
         String dataJsonStr = dataJson.toJSONString();
         redisUtil = applicationContext.getBean(RedisUtil.class);

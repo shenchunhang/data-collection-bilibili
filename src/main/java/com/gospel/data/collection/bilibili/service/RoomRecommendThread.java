@@ -99,6 +99,9 @@ public class RoomRecommendThread extends Thread {
     private void saveData(String res) {
         JSONObject resJson = JSONObject.parseObject(res);
         JSONObject dataJson = resJson.getJSONObject("data");
+        if (dataJson.isEmpty()) {
+            logger.warn("[roomRecOnline]\tdbsave\t" + no + "\tB站返回数据错误");
+        }
 
         //统计数据
         RoomOnline roomOnline = new RoomOnline();

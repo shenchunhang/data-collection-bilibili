@@ -3,6 +3,7 @@ package com.gospel.data.collection.bilibili.service;
 import com.alibaba.fastjson.JSONObject;
 import com.gospel.data.collection.bilibili.pojo.entity.Online;
 import com.gospel.data.collection.bilibili.repository.OnlineRepository;
+import io.netty.util.internal.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -89,6 +90,9 @@ public class OnlineThead extends Thread {
         Online online = new Online();
         JSONObject resJson = JSONObject.parseObject(str);
         JSONObject dataJson = JSONObject.parseObject(resJson.getString("data"));
+        if (dataJson.isEmpty()) {
+            logger.warn("[online]\tdbsave\t" + no + "\tB站返回数据异常");
+        }
         online.setWebOnline(dataJson.getInteger("web_online"));
         online.setPlayOnline(dataJson.getInteger("play_online"));
         online.setAllCount(dataJson.getInteger("all_count"));
