@@ -119,4 +119,6 @@ public class OnlineThead extends Thread {
         dao.flush();
         logger.info("[online]\tdbsave\t" + no + "\t数据添加成功");
     }
+
+
 }
